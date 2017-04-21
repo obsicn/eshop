@@ -46,6 +46,10 @@ INSTALLED_APPS = [
     'widget_tweaks',
 ] + get_core_apps()
 
+#定义SITE_ID
+
+SITE_ID = 1
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -58,10 +62,15 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'eshop.urls'
 
+from oscar import OSCAR_MAIN_TEMPLATE_DIR
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'template'),
+            OSCAR_MAIN_TEMPLATE_DIR,
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -134,5 +143,3 @@ HAYSTACK_CONNECTIONS = {
         'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
     },
 }
-
-OSCAR_REQUIRED_ADDRESS_FIELDS = ('first_name', 'last_name', 'line1', 'line4', 'postcode', 'country')
